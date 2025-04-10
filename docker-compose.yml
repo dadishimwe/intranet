@@ -3,7 +3,9 @@ version: '3'
 services:
   # Nginx web server - handles static files and proxies to backend
   nginx:
-    build: ./nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     ports:
       - "80:80"
       - "443:443"
@@ -26,6 +28,7 @@ services:
   # Backend API server
   backend:
     build: ./backend
+    command: /bin/sh -c "ls -la /app/config && tail -f /dev/null"
     environment:
       - NODE_ENV=production
       - DB_HOST=database
