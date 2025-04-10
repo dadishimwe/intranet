@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Corporate Intranet</title>
+  <meta name="description" content="Corporate Intranet & Management Platform">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  
+  <!-- Preload fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- PWA meta tags -->
+  <meta name="theme-color" content="#3B82F6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="<%= BASE_URL %>apple-touch-icon.png">
+  
+  <!-- No-script message -->
+  <noscript>
+    <style>
+      .noscript-message {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        font-family: 'Inter', sans-serif;
+        padding: 2rem;
+        text-align: center;
+        color: #334155;
+      }
+      .noscript-message h1 {
+        margin-bottom: 1rem;
+      }
+      .noscript-message p {
+        max-width: 500px;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+  <noscript>
+    <div class="noscript-message">
+      <h1>JavaScript Required</h1>
+      <p>We're sorry, but Corporate Intranet doesn't work properly without JavaScript enabled. Please enable it to continue.</p>
+    </div>
+  </noscript>
+  
+  <!-- App container -->
+  <div id="app"></div>
+  
+  <!-- Error handling for older browsers -->
+  <script>
+    // Check for basic modern browser features
+    try {
+      if (!('fetch' in window) || 
+          !('Promise' in window) || 
+          !('assign' in Object) ||
+          !('from' in Array)) {
+        document.write('<div style="font-family: sans-serif; padding: 2rem; text-align: center;"><h1>Browser Not Supported</h1><p>Please use a modern browser like Chrome, Firefox, Safari, or Edge.</p></div>');
+      }
+    } catch (e) {
+      document.write('<div style="font-family: sans-serif; padding: 2rem; text-align: center;"><h1>Browser Error</h1><p>Please use a modern browser like Chrome, Firefox, Safari, or Edge.</p></div>');
+    }
+  </script>
+  
+  <!-- Built files will be auto injected -->
+</body>
+</html>

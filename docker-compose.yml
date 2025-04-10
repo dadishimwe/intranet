@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+  # Nginx web server - handles static files and proxies to backend
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/certificates:/etc/nginx/ssl
+      - ./frontend/dist:/usr/share/nginx/html
+      - file_uploads:/var/www/uploads
+    depends_on:
+      - backend
+    restart: unless-stopped
+    # Set resource constraints for Raspberry Pi
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  # Backend API server
+  backend:
+    build: ./backend
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - FILE_UPLOAD_PATH=/app/uploads
+    volumes:
+      - ./backend:/app
+      - node_modules_backend:/app/node_modules
+      - file_uploads:/app/uploads
+    depends_on:
+      - database
+    restart: unless-stopped
+    # Set resource constraints for Raspberry Pi
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # PostgreSQL database
+  database:
+    image: arm64v8/postgres:13 # ARM-compatible image for Raspberry Pi
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    # Configure for lower memory usage
+    command: postgres -c shared_buffers=128MB -c max_connections=20
+    # Set resource constraints for Raspberry Pi
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # Backup service - runs on a schedule
+  backup:
+    build: ./database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:ro
+      - ./backups:/backups
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - BACKUP_SCHEDULE="0 2 * * *" # Daily at 2am
+    depends_on:
+      - database
+    restart: unless-stopped
+    # Set resource constraints for Raspberry Pi
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+
+volumes:
+  postgres_data:
+  node_modules_backend:
+  file_uploads:
