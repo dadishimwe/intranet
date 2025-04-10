@@ -13,7 +13,7 @@
             :label="showDepartments ? 'Hide Departments' : 'Show Departments'" 
             :icon="showDepartments ? 'pi pi-eye-slash' : 'pi pi-eye'" 
             class="p-button-outlined ml-2" 
-            @click="toggleDepartments"
+            @click="toggleAppDepartments"
           />
         </div>
       </div>
@@ -65,7 +65,7 @@
             <OrgNode 
               v-if="rootNode" 
               :node="rootNode" 
-              :show-departments="showDepartments"
+              :show-departments="showAppDepartments"
               :highlighted-nodes="highlightedNodes"
               @node-click="viewEmployeeDetails"
             />

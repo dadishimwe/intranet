@@ -7,7 +7,7 @@
         <Button 
           label="New Page" 
           icon="pi pi-plus" 
-          @click="openNewPageDialog"
+          @click="openNewPageAppDialog"
           class="p-button-primary"
         />
       </div>
@@ -104,7 +104,7 @@
             <Button 
               label="Create Your First Page" 
               icon="pi pi-plus" 
-              @click="openNewPageDialog" 
+              @click="openNewPageAppDialog" 
               class="p-button-primary mt-3"
             />
           </div>
@@ -247,7 +247,7 @@
           label="Cancel" 
           icon="pi pi-times" 
           class="p-button-text" 
-          @click="closePageDialog" 
+          @click="closePageAppDialog" 
         />
         <Button 
           label="Save" 
@@ -615,7 +615,7 @@ export default {
     };
 
     // Format tree nodes for TreeTable component
-    const formatTreeNodes = (tree, parent = null) => {
+//    const formatTreeNodes = (tree, parent = null) => {
       if (!tree || tree.length === 0) return [];
       
       return tree.map(item => {

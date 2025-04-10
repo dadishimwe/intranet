@@ -3,58 +3,65 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "serve": "vue-cli-service serve",
-      "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint"
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
     },
     "dependencies": {
-      "axios": "^0.27.2",
-      "chart.js": "^3.9.1",
-      "core-js": "^3.25.1",
-      "marked": "^4.1.0",
-      "moment": "^2.29.4",
-      "primeicons": "^6.0.1",
-      "primevue": "^3.17.0",
-      "v-calendar": "^3.0.0-alpha.8",
-      "vue": "^3.2.39",
-      "vue-router": "^4.1.5",
-      "vue3-quill": "^0.3.0",
-      "vuex": "^4.0.2"
+        "@fullcalendar/daygrid": "^6.1.17",
+        "@fullcalendar/interaction": "^6.1.17",
+        "@fullcalendar/list": "^6.1.17",
+        "@fullcalendar/timegrid": "^6.1.17",
+        "@fullcalendar/vue3": "^6.1.17",
+        "axios": "^0.27.2",
+        "chart.js": "^3.9.1",
+        "core-js": "^3.25.1",
+        "dompurify": "^3.2.5",
+        "marked": "^4.1.0",
+        "moment": "^2.29.4",
+        "primeflex": "^4.0.0",
+        "primeicons": "^6.0.1",
+        "primevue": "^3.17.0",
+        "v-calendar": "^3.0.0-alpha.8",
+        "vue": "^3.2.39",
+        "vue-router": "^4.1.5",
+        "vue3-quill": "^0.3.0",
+        "vuex": "^4.0.2"
     },
     "devDependencies": {
-      "@vue/cli-plugin-babel": "~5.0.8",
-      "@vue/cli-plugin-eslint": "~5.0.8",
-      "@vue/cli-plugin-router": "~5.0.8",
-      "@vue/cli-plugin-vuex": "~5.0.8",
-      "@vue/cli-service": "~5.0.8",
-      "@vue/compiler-sfc": "^3.2.39",
-      "babel-eslint": "^10.1.0",
-      "eslint": "^7.32.0",
-      "eslint-plugin-vue": "^9.5.1",
-      "sass": "^1.54.9",
-      "sass-loader": "^13.0.2"
+        "@vue/cli-plugin-babel": "~5.0.8",
+        "@vue/cli-plugin-eslint": "~5.0.8",
+        "@vue/cli-plugin-router": "~5.0.8",
+        "@vue/cli-plugin-vuex": "~5.0.8",
+        "@vue/cli-service": "~5.0.8",
+        "@vue/compiler-sfc": "^3.2.39",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-vue": "^9.5.1",
+        "sass": "^1.54.9",
+        "sass-loader": "^13.0.2"
     },
     "eslintConfig": {
-      "root": true,
-      "env": {
-        "node": true
-      },
-      "extends": [
-        "plugin:vue/vue3-essential",
-        "eslint:recommended"
-      ],
-      "parserOptions": {
-        "parser": "babel-eslint"
-      },
-      "rules": {}
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/vue3-essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {}
     },
     "browserslist": [
-      "> 1%",
-      "last 2 versions",
-      "not dead"
+        "> 1%",
+        "last 2 versions",
+        "not dead"
     ],
     "engines": {
-      "node": ">=14.0.0",
-      "npm": ">=6.14.0"
+        "node": ">=14.0.0",
+        "npm": ">=6.14.0"
     }
-  }
+}

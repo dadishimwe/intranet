@@ -6,7 +6,7 @@
         <Button 
           label="New Expense" 
           icon="pi pi-plus" 
-          @click="openNewExpenseDialog"
+          @click="openNewExpenseAppDialog"
           class="p-button-primary"
         />
       </div>
@@ -300,7 +300,7 @@
           label="Cancel" 
           icon="pi pi-times" 
           class="p-button-text" 
-          @click="closeExpenseDialog" 
+          @click="closeExpenseAppDialog" 
         />
         <Button 
           v-if="dialogMode === 'edit' && canDeleteExpense(expense)" 
@@ -441,7 +441,7 @@
                 label="Reject" 
                 icon="pi pi-times" 
                 class="p-button-danger" 
-                @click="openRejectDialog" 
+                @click="openRejectAppDialog" 
                 :loading="processingAction"
               />
             </div>
@@ -566,7 +566,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const router = useRouter();
+//    const router = useRouter();
     const confirm = useConfirm();
     const toast = useToast();
     const fileUpload = ref(null);

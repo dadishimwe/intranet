@@ -6,7 +6,7 @@
         <Button 
           label="New Event" 
           icon="pi pi-plus" 
-          @click="openNewEventDialog"
+          @click="openNewEventAppDialog"
           class="p-button-primary"
         />
       </div>
@@ -32,10 +32,10 @@
         </div>
         <div class="filter-buttons">
           <MultiSelect 
-            v-model="selectedDepartments" 
+            v-model="selectedAppDepartments" 
             :options="departments" 
             optionLabel="name" 
-            placeholder="All Departments" 
+            placeholder="All AppDepartments" 
             class="departments-filter" 
             :maxSelectedLabels="1"
           />
@@ -203,7 +203,7 @@
           label="Cancel" 
           icon="pi pi-times" 
           class="p-button-text" 
-          @click="closeEventDialog" 
+          @click="closeEventAppDialog" 
         />
         <Button 
           v-if="dialogMode === 'edit' && canDeleteEvent" 
@@ -568,7 +568,7 @@ export default {
         }
         
         // Fetch events from API
-        const response = await fetch('/api/calendar', { 
+//        const response = await fetch('/api/calendar', { 
           params: filters 
         });
         

@@ -7,7 +7,7 @@
             label="Upload Document" 
             icon="pi pi-upload" 
             class="p-button-primary" 
-            @click="openUploadDialog"
+            @click="openUploadAppDialog"
           />
         </div>
       </div>
@@ -73,7 +73,7 @@
         <i class="pi pi-folder-open empty-icon"></i>
         <h3>No documents found</h3>
         <p>There are no documents matching your criteria. Try adjusting your filters or upload a new document.</p>
-        <Button label="Upload Document" icon="pi pi-upload" @click="openUploadDialog" />
+        <Button label="Upload Document" icon="pi pi-upload" @click="openUploadAppDialog" />
       </div>
       
       <!-- Documents list -->
@@ -269,7 +269,7 @@
             label="Cancel" 
             icon="pi pi-times" 
             class="p-button-text" 
-            @click="closeUploadDialog" 
+            @click="closeUploadAppDialog" 
             :disabled="uploading"
           />
           <Button 
@@ -353,7 +353,7 @@
             label="Cancel" 
             icon="pi pi-times" 
             class="p-button-text" 
-            @click="closeEditDialog"
+            @click="closeEditAppDialog"
           />
           <Button 
             label="Save" 

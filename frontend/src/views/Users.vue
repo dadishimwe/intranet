@@ -7,7 +7,7 @@
           v-if="isAdmin"
           label="Add User" 
           icon="pi pi-plus" 
-          @click="openNewUserDialog"
+          @click="openNewUserAppDialog"
           class="p-button-primary"
         />
       </div>
@@ -34,7 +34,7 @@
               :options="departments"
               optionLabel="name"
               optionValue="id"
-              placeholder="All Departments"
+              placeholder="All AppDepartments"
               class="w-full"
               @change="onFilterChange"
             />
@@ -359,7 +359,7 @@
           label="Cancel" 
           icon="pi pi-times" 
           class="p-button-text" 
-          @click="closeUserDialog" 
+          @click="closeUserAppDialog" 
         />
         <Button 
           v-if="dialogMode === 'edit' && isAdmin" 
@@ -574,7 +574,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const router = useRouter();
+//    const router = useRouter();
     const confirm = useConfirm();
     const toast = useToast();
 
