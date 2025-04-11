@@ -599,6 +599,60 @@ if ! crontab -l | grep -q "monitor.sh"; then
   (crontab -l 2>/dev/null; echo "*/30 * * * * /home/pi/projects/corporate-intranet/scripts/monitor.sh >> /home/pi/corporate-intranet/logs/monitor.log 2>&1") | crontab -
 fi
 
+# Create docker-compose.yml
+print_message "Creating docker-compose.yml..."
+cat > docker-compose.yml << EOL
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/certificates:/etc/nginx/ssl
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - backend
+    networks:
+      - intranet-net
+
+  backend:
+    build: ./backend
+    environment:
+      - DB_HOST=database
+      - DB_USER=\${DB_USER}
+      - DB_PASSWORD=\${DB_PASSWORD}
+      - DB_NAME=\${DB_NAME}
+    volumes:
+      - ./backend:/app
+      - ./uploads:/app/uploads
+    networks:
+      - intranet-net
+
+  database:
+    build: ./database
+    environment:
+      - POSTGRES_DB=\${DB_NAME}
+      - POSTGRES_USER=\${DB_USER}
+      - POSTGRES_PASSWORD=\${DB_PASSWORD}
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+      - ./backups:/backups
+    networks:
+      - intranet-net
+
+  frontend:
+    build: ./frontend
+    networks:
+      - intranet-net
+
+networks:
+  intranet-net:
+    driver: bridge
+EOL
+
 # Start services
 print_message "Starting services..."
 docker-compose up -d
