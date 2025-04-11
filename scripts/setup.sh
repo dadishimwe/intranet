@@ -84,7 +84,7 @@ else
 fi
 
 # Clone repository or create project directory
-APP_DIR="/opt/corporate-intranet"
+APP_DIR="/home/pi/corporate-intranet"
 if [ -d "$APP_DIR" ]; then
   print_message "Application directory already exists."
   read -p "Do you want to remove it and install fresh? (y/n) " -n 1 -r
@@ -447,10 +447,10 @@ cat > scripts/backup.sh << 'EOL'
 # Automatic backup script for Corporate Intranet
 
 # Load environment variables
-source /opt/corporate-intranet/.env
+source /home/pi/corporate-intranet/.env
 
 # Set backup directory
-BACKUP_DIR="/opt/corporate-intranet/backups"
+BACKUP_DIR="/home/pi/projects/corporate-intranet/backups"
 mkdir -p "$BACKUP_DIR"
 
 # Set timestamp
@@ -481,7 +481,7 @@ cat > scripts/update.sh << 'EOL'
 # Update script for Corporate Intranet
 
 # Move to app directory
-cd /opt/corporate-intranet
+cd /home/pi/corporate-intranet
 
 # Pull latest changes if using Git
 # git pull
@@ -511,7 +511,7 @@ cat > scripts/monitor.sh << 'EOL'
 # Monitoring script for Corporate Intranet
 
 # Set variables
-APP_DIR="/opt/corporate-intranet"
+APP_DIR="/home/pi/corporate-intranet"
 LOG_FILE="$APP_DIR/logs/monitor.log"
 THRESHOLD_CPU_TEMP=70  # degrees Celsius
 THRESHOLD_DISK_SPACE=85  # percentage
@@ -590,13 +590,13 @@ chmod +x scripts/monitor.sh
 # Set up automatic backups with cron
 print_message "Setting up automatic backups..."
 if ! crontab -l | grep -q "backup.sh"; then
-  (crontab -l 2>/dev/null; echo "0 2 * * * /opt/corporate-intranet/scripts/backup.sh >> /opt/corporate-intranet/logs/backup.log 2>&1") | crontab -
+  (crontab -l 2>/dev/null; echo "0 2 * * * /home/pi/projects/corporate-intranet/scripts/backup.sh >> /home/pi/corporate-intranet/logs/backup.log 2>&1") | crontab -
 fi
 
 # Set up monitoring with cron
 print_message "Setting up monitoring..."
 if ! crontab -l | grep -q "monitor.sh"; then
-  (crontab -l 2>/dev/null; echo "*/30 * * * * /opt/corporate-intranet/scripts/monitor.sh >> /opt/corporate-intranet/logs/monitor.log 2>&1") | crontab -
+  (crontab -l 2>/dev/null; echo "*/30 * * * * /home/pi/projects/corporate-intranet/scripts/monitor.sh >> /home/pi/corporate-intranet/logs/monitor.log 2>&1") | crontab -
 fi
 
 # Start services

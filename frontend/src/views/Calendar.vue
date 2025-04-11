@@ -353,6 +353,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import FullCalendar from '@fullcalendar/vue3'
 
 // PrimeVue components
 import Button from 'primevue/button';
@@ -485,7 +486,7 @@ export default {
     // List view options
     const calendarListOptions = computed(() => ({
       ...calendarOptions.value,
-      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+      plugins: [listPlugin],
       initialView: 'listWeek'
     }));
 
@@ -551,7 +552,8 @@ export default {
         
         // Date range for current view
         const calendarApi = fullCalendar.value?.getApi();
-        if (calendarApi) {
+        if (!calendarApi) return;
+	if (calendarApi) {
           const view = calendarApi.view;
           filters.start = view.activeStart.toISOString();
           filters.end = view.activeEnd.toISOString();
@@ -829,6 +831,7 @@ export default {
 
     // Change calendar view to previous month/week/day
     const previousPeriod = () => {
+      if (!fullCalendar.value) return;
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.prev();
       currentDate.value = calendarApi.getDate();
@@ -836,6 +839,7 @@ export default {
 
     // Change calendar view to next month/week/day
     const nextPeriod = () => {
+      if (!fullCalendar.value) return;
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.next();
       currentDate.value = calendarApi.getDate();
